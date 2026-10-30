@@ -1,7 +1,7 @@
 # BREADTH-FIRST-SEARCH
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
+<h3>Name: JAGAN J P </h3>
+<h3>Register Number: 212224230099 </h3>
 <H3>Aim:</H3>
 <p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -21,12 +21,10 @@ Step1: Initially queue and visited arrays are empty.
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8acdebf8-ecc2-4d10-a208-45cce441f059)
 
-
 Queue and visited arrays are empty initially.
 Step2: Push node 0 into queue and mark it visited.
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/0e9ce012-8e1f-43d7-b7b9-c0fb19fe0c3f)
-
 
 Push node 0 into queue and mark it visited.
 Step 3: Remove node 0 from the front of queue and visit the unvisited neighbours and push them into queue.
@@ -54,62 +52,58 @@ As we can see that every neighbours of node 4 are visited, so move to the next n
 Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue.
 Now, Queue becomes empty, So, terminate these process of iteration.
 
+## Algorithm:
 
-<hr>
-<h2>Algorithm:</h2>
-<hr>
-<ol>
-  <li>Construct a Graph with Nodes and Edges</li>
- <li>Breadth First Uses Queue and iterates through the Queue for Traversal.</li>
-  <li>Insert a Start Node into the Queue.</li>
-<li>Find its Successors Or neighbors and Check whether the node is visited or not.</li>
-<li>If Not Visited, add it to the Queue. Else Continue.</li>
-<li>Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.</li>
+1. Construct a Graph with Nodes and Edges.
+2. Breadth First Uses Queue and iterates through the Queue for Traversal.
+3. Insert a Start Node into the Queue.
+4. Find its Successors Or neighbors and Check whether the node is visited or not.
+5. If Not Visited, add it to the Queue. Else Continue.
+6. Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.
 
-</ol>
+## PROGRAM:
+```
+from collections import deque, defaultdict
+def bfs(graph, start, visited, path):
+    queue = deque()
+    visited[start] = True
+    queue.append(start)
+    path.append(start)
 
-<hr>
-<h3>Sample Input</h3>
-<hr>
-7 9 <BR>
-A B <BR>
-A C <BR>
-A F <BR>
-C E <BR>
-C F <BR>
-C D <BR>
-D E <BR>
-D G <BR>
-G F <BR>
-<hr>
-<h3>Sample Output</h3>
-<hr>
-['A', 'B', 'C', 'F', 'E', 'D', 'G']
+    while queue:
+        node = queue.popleft()
 
-<hr>
+        for neighbour in graph[node]:
+            if not visited[neighbour]:
+                visited[neighbour] = True
+                queue.append(neighbour)
+                path.append(neighbour)
 
-<hr>
-<h3>Sample Input</h3>
-<hr>
-5 6 <BR>
-0 1 <BR>
-0 2 <BR>
-1 2 <BR>
-1 3 <BR>
-2 4 <BR>
-3 4 <BR>
-<hr>
-<h3>Sample Output</h3>
-<hr>
-['0', '1', '2', '3', '4']
-<hr>
-<h3>Result:</h3>
-<hr>
+    return path
+graph = defaultdict(list)
+
+v, e = map(int, input("Enter the number of nodes and edges: ").split())
+print("\nEnter the edges (Adjacent Nodes):")
+for i in range(e):
+    u, w = input(f"Edge {i+1} (u v): ").split()
+    graph[u].append(w)
+    graph[w].append(u)
+print("\nAdjacency List:")
+for node in graph:
+    print(node, "->", graph[node])
+
+start = input("\nEnter the start node for BFS: ")
+if start not in graph:
+    print("Invalid start node!")
+else:
+    visited = defaultdict(bool)
+    path = []
+    traversedpath = bfs(graph, start, visited, path)
+    print("\nBFS Traversal:", " -> ".join(traversedpath))
+```
+## OUTPUT:
+
+<img width="1507" height="828" alt="image" src="https://github.com/user-attachments/assets/dcb4fb30-fe77-446b-9cb7-afcf2dccb8ea" />
+
+## Result:
 <p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
-
-
-
-
-
-
-
